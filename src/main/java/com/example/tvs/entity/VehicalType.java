@@ -10,13 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 @Entity
-@Table(name = "vehicalType")
+@Table(name = "vehicleType")
 @NamedQuery(name = "VehicalType.findAll", query = "SELECT v FROM VehicalType v")
 public class VehicalType implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "vehical_type_id")
-	private Long vehicalTypeId;
+	@Column(name = "vehicle_type_id")
+	private Long vehicleTypeId;
 	
 	@Column(name = "value")
 	private String value;
@@ -27,12 +27,12 @@ public class VehicalType implements Serializable {
 	@Column(name = "status")
 	private String status;
 
-	public Long getVehicalTypeId() {
-		return vehicalTypeId;
+	public Long getVehicleTypeId() {
+		return vehicleTypeId;
 	}
 
-	public void setVehicalTypeId(Long vehicalTypeId) {
-		this.vehicalTypeId = vehicalTypeId;
+	public void setVehicleTypeId(Long vehicleTypeId) {
+		this.vehicleTypeId = vehicleTypeId;
 	}
 
 	public String getValue() {
@@ -63,9 +63,9 @@ public class VehicalType implements Serializable {
 		
 	}
 
-	public VehicalType(Long vehicalTypeId, String value, String descg, String status) {
+	public VehicalType(Long vehicleTypeId, String value, String descg, String status) {
 		super();
-		this.vehicalTypeId = vehicalTypeId;
+		this.vehicleTypeId = vehicleTypeId;
 		this.value = value;
 		this.descg = descg;
 		this.status = status;

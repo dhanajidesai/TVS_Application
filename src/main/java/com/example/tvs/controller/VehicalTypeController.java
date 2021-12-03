@@ -23,18 +23,18 @@ import com.example.tvs.service.VehicalTypeService;
 import com.example.tvs.util.Constant;
 
 @RestController
-@RequestMapping("/vehicalType")
+@RequestMapping("/vehicleType")
 public class VehicalTypeController {
 	@Autowired
 	VehicalTypeService vehicalTypeService;
 	
-	@RequestMapping(value = "/addVehicalTypes", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/addVehicleTypes", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
 	public VehicalType addVehicalTypes(@RequestBody VehicalType vehicalType) {
 			return vehicalTypeService.addVehicalTypes(vehicalType);
 	}
 	
-	@RequestMapping(value = "/getAllVehicalTypes", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<VehicalType> getAllVehicalTypes() {
+	@RequestMapping(value = "/getAllVehicleTypes", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<VehicalType> getAllVehicleTypes() {
 			return vehicalTypeService.getAllVehicalTypes();
 	}
 
