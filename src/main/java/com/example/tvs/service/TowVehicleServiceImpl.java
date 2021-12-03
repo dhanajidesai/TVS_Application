@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -47,6 +48,26 @@ public class TowVehicleServiceImpl implements TowVehicleService {
             throw new ResourceNotFoundException("Vehicle not exist with id : "+id);
         }
         return towVehicleRepository.findById(id);
+    }
+    
+    @Override
+    public List<TowVehicle> findByStatus(String status) throws ResourceNotFoundException {
+        List<TowVehicle> towVehicleList  = towVehicleRepository.findTowVehicleBystatus(status);
+        if (towVehicleList.isEmpty()) {
+            throw new ResourceNotFoundException("Vehicle not exist with status : "+status);
+        }
+        return towVehicleList;
+    }
+    
+    @Override
+    public Optional<TowVehicle> findByVehicleNo(String vehicleNo) throws ResourceNotFoundException {
+    	Optional<TowVehicle> towVehicle  = towVehicleRepository.findByVehicleNo(vehicleNo);
+        if (!towVehicle.isPresent()) {
+            throw new ResourceNotFoundException("Vehicle not exist with vehicleNo : "+vehicleNo);
+        }else {
+        	return towVehicle;
+        }
+        
     }
 
 }

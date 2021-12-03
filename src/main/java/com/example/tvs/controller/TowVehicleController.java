@@ -75,4 +75,24 @@ public class TowVehicleController {
     	return ResponseEntity.ok(new ApiMsgResponse(HttpStatus.OK.value(), Constant.SUCCESS,uploadedImage));
     }
     
+    @RequestMapping(value = "/findByStatus", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ApiMsgResponse> findByStatus(@RequestParam("status") String status) throws ResourceNotFoundException {
+        try {
+            return ResponseEntity.ok(new ApiMsgResponse(HttpStatus.OK.value(), Constant.SUCCESS, towVehicleService.findByStatus(status)));
+        } catch (Exception e) {
+            ApiMsgResponse apiMsgResponse = new ApiMsgResponse(HttpStatus.NOT_FOUND.value(), e.getMessage(), null);
+            return new ResponseEntity<ApiMsgResponse>(apiMsgResponse, HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    @RequestMapping(value = "/findByVehicleNo", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ApiMsgResponse> findByVehicleNo(@RequestParam("vehicleNo") String vehicleNo) throws ResourceNotFoundException {
+        try {
+            return ResponseEntity.ok(new ApiMsgResponse(HttpStatus.OK.value(), Constant.SUCCESS, towVehicleService.findByVehicleNo(vehicleNo)));
+        } catch (Exception e) {
+            ApiMsgResponse apiMsgResponse = new ApiMsgResponse(HttpStatus.NOT_FOUND.value(), e.getMessage(), null);
+            return new ResponseEntity<ApiMsgResponse>(apiMsgResponse, HttpStatus.NOT_FOUND);
+        }
+    }
+    
 }
