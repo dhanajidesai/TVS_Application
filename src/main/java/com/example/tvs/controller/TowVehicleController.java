@@ -8,15 +8,26 @@ import com.example.tvs.exception.UserAlreadyExistException;
 import com.example.tvs.payload.ApiMsgResponse;
 import com.example.tvs.service.TowVehicleService;
 import com.example.tvs.util.Constant;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/vehicle")
 public class TowVehicleController {
+	
+	@Value("${uploadedImagesPath}")
+	private String filePath;
 
     @Autowired
     TowVehicleService towVehicleService;
@@ -46,4 +57,22 @@ public class TowVehicleController {
             return new ResponseEntity<ApiMsgResponse>(apiMsgResponse, HttpStatus.NOT_FOUND);
         }
     }
+    
+    @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ApiMsgResponse> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+    	Date date=new Date();
+    	Long ldate=date.getTime();
+    	String name = file.getOriginalFilename();
+    	int dot = name.lastIndexOf('.');
+    	String base = (dot == -1) ? name : name.substring(0, dot);
+    	String extension = (dot == -1) ? "" : name.substring(dot+1);
+    	File convertFile=new File(filePath+base+"_"+ldate+"."+extension);
+    	String uploadedImage=base+"_"+ldate+"."+extension;
+    	convertFile.createNewFile();
+    	FileOutputStream fout=new FileOutputStream(convertFile);
+    	fout.write(file.getBytes());
+    	fout.close();
+    	return ResponseEntity.ok(new ApiMsgResponse(HttpStatus.OK.value(), Constant.SUCCESS,uploadedImage));
+    }
+    
 }

@@ -132,11 +132,11 @@ public class TowVehicle implements Serializable {
         this.status = status;
         this.towedById = towedById;
         this.createdDate = new Date();
-        this.updatedDate = updatedDate;
+        this.updatedDate = new Date();
         this.lastUpdateById = lastUpdateById;
     }
 
-    public TowVehicle(String vehicleNo, String vehicleType, String description, String road, String image, String status, Integer towedById, Date createdDate, Integer lastUpdateById) {
+    public TowVehicle(String vehicleNo, String vehicleType, String description, String road, String image, String status, Integer towedById, Date createdDate, Integer lastUpdateById,Date updatedDate) {
         this.vehicleNo = vehicleNo;
         this.vehicleType = vehicleType;
         this.description = description;
@@ -146,6 +146,7 @@ public class TowVehicle implements Serializable {
         this.towedById = towedById;
         this.createdDate = createdDate;
         this.lastUpdateById = lastUpdateById;
+        this.updatedDate = updatedDate;
     }
 
     @Override

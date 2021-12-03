@@ -18,7 +18,7 @@ public class TowVehicleServiceImpl implements TowVehicleService {
 
     @Override
     public TowVehicle save(TowVehicleDto towVehicleDto) {
-        TowVehicle towVehicle = new TowVehicle(towVehicleDto.getVehicleNo(), towVehicleDto.getVehicleType(), towVehicleDto.getDescription(), towVehicleDto.getRoad(), towVehicleDto.getImage(), towVehicleDto.getStatus(), towVehicleDto.getTowedById(), new Date(), towVehicleDto.getLastUpdateById());
+        TowVehicle towVehicle = new TowVehicle(towVehicleDto.getVehicleNo(), towVehicleDto.getVehicleType(), towVehicleDto.getDescription(), towVehicleDto.getRoad(), towVehicleDto.getImage(), towVehicleDto.getStatus(), towVehicleDto.getTowedById(), new Date(), towVehicleDto.getLastUpdateById(),new Date());
         return towVehicleRepository.save(towVehicle);
     }
 
