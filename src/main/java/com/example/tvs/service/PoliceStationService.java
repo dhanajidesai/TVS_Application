@@ -11,5 +11,5 @@ import com.example.tvs.exception.ResourceNotFoundException;
 import com.example.tvs.exception.UserAlreadyExistException;
 
 public interface PoliceStationService {
-	List<PoliceStation> getAllPoliceStations();
+	List<PoliceStation> getAllPoliceStations()throws ResourceNotFoundException;;
 }

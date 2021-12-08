@@ -21,8 +21,11 @@ public class PoliceStationServiceimpl implements PoliceStationService {
 	PoliceStationRepository policeStationRepository;
 	
 	@Override
-	public List<PoliceStation> getAllPoliceStations(){
+	public List<PoliceStation> getAllPoliceStations() throws ResourceNotFoundException{
 		List<PoliceStation> policeStationList=policeStationRepository.findAll();
+			if (policeStationList.isEmpty()) {
+                throw new ResourceNotFoundException("Police stations not exist in Database");
+            }
 		return policeStationList;
 	}
 	

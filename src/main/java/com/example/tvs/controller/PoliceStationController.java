@@ -31,8 +31,13 @@ public class PoliceStationController {
 	PoliceStationService policeStationService;
 	
 	@RequestMapping(value = "/getAllPoliceStations", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<PoliceStation> getAllPoliceStations() {
-			return policeStationService.getAllPoliceStations();
+	public ResponseEntity<ApiMsgResponse> getAllPoliceStations()throws ResourceNotFoundException {
+		try {
+            return ResponseEntity.ok(new ApiMsgResponse(HttpStatus.OK.value(), Constant.SUCCESS, policeStationService.getAllPoliceStations()));
+        } catch (Exception e) {
+            ApiMsgResponse apiMsgResponse = new ApiMsgResponse(HttpStatus.NOT_FOUND.value(), e.getMessage(), null);
+            return new ResponseEntity<ApiMsgResponse>(apiMsgResponse, HttpStatus.NOT_FOUND);
+        }
 	}
 
 }
