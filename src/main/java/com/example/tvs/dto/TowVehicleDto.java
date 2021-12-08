@@ -24,8 +24,20 @@ public class TowVehicleDto implements Serializable {
     private Date updatedDate;
 
     private Integer lastUpdateById;
+    
+    private String policeStation;
+    
+    
 
-    public String getVehicleNo() {
+    public String getPoliceStation() {
+		return policeStation;
+	}
+
+	public void setPoliceStation(String policeStation) {
+		this.policeStation = policeStation;
+	}
+
+	public String getVehicleNo() {
         return vehicleNo;
     }
 
@@ -98,19 +110,15 @@ public class TowVehicleDto implements Serializable {
         this.lastUpdateById = lastUpdateById;
     }
 
-    @Override
-    public String toString() {
-        return "TowVehicle{" +
-                ", vehicleNo='" + vehicleNo + '\'' +
-                ", vehicleType='" + vehicleType + '\'' +
-                ", description='" + description + '\'' +
-                ", road='" + road + '\'' +
-                ", image='" + image + '\'' +
-                ", status='" + status + '\'' +
-                ", towedById=" + towedById +
-                ", updatedDate=" + updatedDate +
-                ", lastUpdateById=" + lastUpdateById +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "TowVehicleDto [vehicleNo=" + vehicleNo + ", vehicleType=" + vehicleType + ", description=" + description
+				+ ", road=" + road + ", image=" + image + ", status=" + status + ", towedById=" + towedById
+				+ ", updatedDate=" + updatedDate + ", lastUpdateById=" + lastUpdateById + ", policeStation="
+				+ policeStation + "]";
+	}
+
+   
+    
 }
 

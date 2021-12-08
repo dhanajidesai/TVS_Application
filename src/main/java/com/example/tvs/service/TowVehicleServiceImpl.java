@@ -19,7 +19,7 @@ public class TowVehicleServiceImpl implements TowVehicleService {
 
     @Override
     public TowVehicle save(TowVehicleDto towVehicleDto) {
-        TowVehicle towVehicle = new TowVehicle(towVehicleDto.getVehicleNo(), towVehicleDto.getVehicleType(), towVehicleDto.getDescription(), towVehicleDto.getRoad(), towVehicleDto.getImage(), towVehicleDto.getStatus(), towVehicleDto.getTowedById(), new Date(), towVehicleDto.getLastUpdateById(),new Date());
+        TowVehicle towVehicle = new TowVehicle(towVehicleDto.getVehicleNo(), towVehicleDto.getVehicleType(), towVehicleDto.getDescription(), towVehicleDto.getRoad(), towVehicleDto.getImage(), towVehicleDto.getStatus(), towVehicleDto.getTowedById(), new Date(), towVehicleDto.getLastUpdateById(),new Date(),towVehicleDto.getPoliceStation());
         return towVehicleRepository.save(towVehicle);
     }
 
@@ -38,6 +38,7 @@ public class TowVehicleServiceImpl implements TowVehicleService {
         towVehicle.setTowedById(towVehicleDto.getTowedById());
         towVehicle.setUpdatedDate(new Date());
         towVehicle.setLastUpdateById(towVehicleDto.getLastUpdateById());
+        towVehicle.setPoliceStation(towVehicleDto.getPoliceStation());
         return towVehicleRepository.save(towVehicle);
     }
 
@@ -52,11 +53,20 @@ public class TowVehicleServiceImpl implements TowVehicleService {
     
     @Override
     public List<TowVehicle> findByStatus(String status) throws ResourceNotFoundException {
-        List<TowVehicle> towVehicleList  = towVehicleRepository.findTowVehicleBystatus(status);
-        if (towVehicleList.isEmpty()) {
-            throw new ResourceNotFoundException("Vehicle not exist with status : "+status);
-        }
-        return towVehicleList;
+    	if(status.equalsIgnoreCase("NULL")) {
+    		List<TowVehicle> towVehicleList  = towVehicleRepository.findTowVehicle(status);
+    		if (towVehicleList.isEmpty()) {
+                throw new ResourceNotFoundException("Towed vehicle is not exist in Database");
+            }
+            return towVehicleList;
+    	}else {
+    		List<TowVehicle> towVehicleList  = towVehicleRepository.findTowVehicleBystatus(status);
+            if (towVehicleList.isEmpty()) {
+                throw new ResourceNotFoundException("Vehicle not exist with status : "+status);
+            }
+            return towVehicleList;
+    	}
+        
     }
     
     @Override

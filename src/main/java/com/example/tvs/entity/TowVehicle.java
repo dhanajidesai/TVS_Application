@@ -30,6 +30,8 @@ public class TowVehicle implements Serializable {
     private Date updatedDate;
 
     private Integer lastUpdateById;
+    
+    private String policeStation;
 
     public Long getId() {
         return id;
@@ -118,11 +120,20 @@ public class TowVehicle implements Serializable {
     public void setLastUpdateById(Integer lastUpdateById) {
         this.lastUpdateById = lastUpdateById;
     }
+    
 
-    public TowVehicle() {
+    public String getPoliceStation() {
+		return policeStation;
+	}
+
+	public void setPoliceStation(String policeStation) {
+		this.policeStation = policeStation;
+	}
+
+	public TowVehicle() {
     }
 
-    public TowVehicle(Long id, String vehicleNo, String vehicleType, String description, String road, String image, String status, Integer towedById, Date createdDate, Date updatedDate, Integer lastUpdateById) {
+    public TowVehicle(Long id, String vehicleNo, String vehicleType, String description, String road, String image, String status, Integer towedById, Date createdDate, Date updatedDate, Integer lastUpdateById, String policeStation) {
         this.id = id;
         this.vehicleNo = vehicleNo;
         this.vehicleType = vehicleType;
@@ -134,9 +145,10 @@ public class TowVehicle implements Serializable {
         this.createdDate = new Date();
         this.updatedDate = new Date();
         this.lastUpdateById = lastUpdateById;
+        this.policeStation=policeStation;
     }
 
-    public TowVehicle(String vehicleNo, String vehicleType, String description, String road, String image, String status, Integer towedById, Date createdDate, Integer lastUpdateById,Date updatedDate) {
+    public TowVehicle(String vehicleNo, String vehicleType, String description, String road, String image, String status, Integer towedById, Date createdDate, Integer lastUpdateById,Date updatedDate,String policeStation) {
         this.vehicleNo = vehicleNo;
         this.vehicleType = vehicleType;
         this.description = description;
@@ -147,22 +159,17 @@ public class TowVehicle implements Serializable {
         this.createdDate = createdDate;
         this.lastUpdateById = lastUpdateById;
         this.updatedDate = updatedDate;
+        this.policeStation=policeStation;
     }
 
-    @Override
-    public String toString() {
-        return "TowVehicle{" +
-                "id=" + id +
-                ", vehicleNo='" + vehicleNo + '\'' +
-                ", vehicleType='" + vehicleType + '\'' +
-                ", description='" + description + '\'' +
-                ", road='" + road + '\'' +
-                ", image='" + image + '\'' +
-                ", status='" + status + '\'' +
-                ", towedById=" + towedById +
-                ", createdDate=" + createdDate +
-                ", updatedDate=" + updatedDate +
-                ", lastUpdateById=" + lastUpdateById +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "TowVehicle [id=" + id + ", vehicleNo=" + vehicleNo + ", vehicleType=" + vehicleType + ", description="
+				+ description + ", road=" + road + ", image=" + image + ", status=" + status + ", towedById="
+				+ towedById + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + ", lastUpdateById="
+				+ lastUpdateById + ", policeStation=" + policeStation + "]";
+	}
+
+   
+    
 }
