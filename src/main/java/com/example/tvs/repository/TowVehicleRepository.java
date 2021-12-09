@@ -25,5 +25,11 @@ public interface TowVehicleRepository extends JpaRepository<TowVehicle, Long> {
     
     @Query(value = "select * from tow_vehicle where vehicle_no = ? ORDER BY updated_date DESC LIMIT 1", nativeQuery = true)
     Optional<TowVehicle> findByVehicleNo(String vehicleNo);
+    
+    @Query(value = "select * from tow_vehicle where police_station=? ORDER BY updated_date DESC", nativeQuery = true)
+    List<TowVehicle> findTowVehicleByPoliceStation(String policestation);
+    
+    @Query(value = "select * from tow_vehicle where status = :status AND police_station = :policestation ORDER BY updated_date DESC", nativeQuery = true)
+    List<TowVehicle> findTowVehicleBystatusAndPoliceStation(String status,String policestation);
 
 }

@@ -79,5 +79,42 @@ public class TowVehicleServiceImpl implements TowVehicleService {
         }
         
     }
+    
+    
+    @Override
+    public List<TowVehicle> findByStatusAndPoliceStation(String status,String policestation) throws ResourceNotFoundException {
+    	if(status.equalsIgnoreCase("NULL")) {
+    		if(policestation.equalsIgnoreCase("NULL")) {
+    			List<TowVehicle> towVehicleList  = towVehicleRepository.findAll();
+        		if (towVehicleList.isEmpty()) {
+                    throw new ResourceNotFoundException("Towed vehicle is not exist in Database");
+                }
+                return towVehicleList;
+    		}else {
+    			List<TowVehicle> towVehicleList  = towVehicleRepository.findTowVehicleByPoliceStation(policestation);
+        		if (towVehicleList.isEmpty()) {
+                    throw new ResourceNotFoundException("Towed vehicle is not exis with Police station :"+policestation);
+                }
+                return towVehicleList;
+    		}
+    		
+    	}else {
+    		if(policestation.equalsIgnoreCase("NULL")) {
+    			List<TowVehicle> towVehicleList  = towVehicleRepository.findTowVehicleBystatus(status);
+                if (towVehicleList.isEmpty()) {
+                    throw new ResourceNotFoundException("Vehicle not exist with status : "+status);
+                }
+                return towVehicleList;
+    		}else {
+    			List<TowVehicle> towVehicleList  = towVehicleRepository.findTowVehicleBystatusAndPoliceStation(status,policestation);
+                if (towVehicleList.isEmpty()) {
+                    throw new ResourceNotFoundException("Vehicle not exist with status : "+status +" and PoliceStation :" +policestation);
+                }
+                return towVehicleList;
+    		}
+    		
+    	}
+        
+    }
 
 }

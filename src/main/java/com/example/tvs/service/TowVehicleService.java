@@ -13,4 +13,5 @@ public interface TowVehicleService {
     Optional<TowVehicle> findById(Long id) throws ResourceNotFoundException;
     List<TowVehicle> findByStatus(String status) throws ResourceNotFoundException;
     Optional<TowVehicle> findByVehicleNo(String vehicleNo) throws ResourceNotFoundException;
+    List<TowVehicle> findByStatusAndPoliceStation(String status,String policestation) throws ResourceNotFoundException;
 }

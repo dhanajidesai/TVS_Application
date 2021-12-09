@@ -95,4 +95,14 @@ public class TowVehicleController {
         }
     }
     
+    @RequestMapping(value = "/findByStatusAndPoliceStation", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ApiMsgResponse> findByStatusAndPoliceStation(@RequestParam("status") String status,@RequestParam("policestation") String policestation) throws ResourceNotFoundException {
+        try {
+            return ResponseEntity.ok(new ApiMsgResponse(HttpStatus.OK.value(), Constant.SUCCESS, towVehicleService.findByStatusAndPoliceStation(status,policestation)));
+        } catch (Exception e) {
+            ApiMsgResponse apiMsgResponse = new ApiMsgResponse(HttpStatus.NOT_FOUND.value(), e.getMessage(), null);
+            return new ResponseEntity<ApiMsgResponse>(apiMsgResponse, HttpStatus.NOT_FOUND);
+        }
+    }
+    
 }
